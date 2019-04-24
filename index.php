@@ -3,25 +3,25 @@
 Plugin Name: WP Terms Popup
 Plugin URI: http://termsplugin.com
 Description: Make your visitors agree to your terms and conditions before entering your website. Now you can create as many different terms as you want and choose to display any of them on any specific post or page. Shortcode requires HTML5.
-Version: 1.1.4
-Author: Tentenbiz & Dalv8
+Version: 1.2.0
+Author: Tentenbiz
 Author URI: http://tentenbiz.com
 */
 
-function terms_registerStyles () {	
-   wp_register_style( 'popupstyle', plugins_url( 'wp-terms-popup/popup-style.css' ) );
-   wp_enqueue_style( 'popupstyle' );
+function wtp_registerStyles () {	
+   wp_register_style( 'wtppopupstyle', plugins_url( 'wp-terms-popup/assets/popup-style.css' ) );
+   wp_enqueue_style( 'wtppopupstyle' );
 }
-add_action( 'wp_enqueue_scripts', 'terms_registerStyles', 1 );
+add_action( 'wp_enqueue_scripts', 'wtp_registerStyles', 1 );
 
 
-function terms_registerScripts () {	
-   wp_enqueue_script( 'wtplocalstoragefallback', plugins_url( 'wp-terms-popup/lspolyfill.js' ), false );
+function wtp_registerScripts () {	
+   wp_enqueue_script( 'wtplocalstoragefallback', plugins_url( 'wp-terms-popup/assets/lspolyfill.js' ), false );
 }
-add_action( 'wp_enqueue_scripts', 'terms_registerScripts' );
+add_action( 'wp_enqueue_scripts', 'wtp_registerScripts' );
 
 
-function terms_openPopup () {
+function wtp_openPopup () {
 	
 	$currentpostid = get_the_ID();
 	$enabled = get_post_meta( $currentpostid, 'terms_enablepop', true );
@@ -40,10 +40,10 @@ function terms_openPopup () {
 	}
 
 }
-add_action('get_header', 'terms_openPopup'); //where the popup fires
+add_action('get_header', 'wtp_openPopup'); //where the popup fires
 
 
-function terms_shortcode_call ( $atts ) { //shortcodes are for popups on custom post types
+function wtp_shortcodeCall ( $atts ) { //shortcodes are for popups on custom post types
 
 	extract( shortcode_atts( array(
         'id' => 0
@@ -67,10 +67,10 @@ function terms_shortcode_call ( $atts ) { //shortcodes are for popups on custom 
 	include('terms.php');
 	
 }
-add_shortcode('wpterms', 'terms_shortcode_call');
+add_shortcode('wpterms', 'wtp_shortcodeCall');
 
 
-function terms_popup_post_type() {
+function wtp_popupPostType() {
 	
 	$labels = array(
 		'name'               => _x( 'Terms Popups', 'post type general name', 'wp-terms-popup' ),
@@ -104,13 +104,13 @@ function terms_popup_post_type() {
 	);
     register_post_type( 'termpopup', $args );
 }
-add_action( 'init', 'terms_popup_post_type' );
+add_action( 'init', 'wtp_popupPostType' );
 
 
-add_filter( 'manage_edit-termpopup_columns', 'terms_edit_termpopup_columns' );
-add_action( 'manage_termpopup_posts_custom_column', 'terms_manage_termpopup_columns', 10, 2 );
+add_filter( 'manage_edit-termpopup_columns', 'wtp_editTermpopupColumns' );
+add_action( 'manage_termpopup_posts_custom_column', 'wtp_manageTermpopupColumns', 10, 2 );
 
-function terms_edit_termpopup_columns( $columns ) {
+function wtp_editTermpopupColumns( $columns ) {
 	
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
@@ -124,7 +124,7 @@ function terms_edit_termpopup_columns( $columns ) {
 }
 
 
-function terms_manage_termpopup_columns( $column, $post_id ) {
+function wtp_manageTermpopupColumns( $column, $post_id ) {
 	global $post;
 
 	switch( $column ) {
@@ -139,18 +139,18 @@ function terms_manage_termpopup_columns( $column, $post_id ) {
 }
 
 
-add_action( 'load-post.php', 'terms_post_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'terms_post_meta_boxes_setup' );
+add_action( 'load-post.php', 'wtp_postMetaBoxesSetup' );
+add_action( 'load-post-new.php', 'wtp_postMetaBoxesSetup' );
 
 
-function terms_post_meta_boxes_setup() {
-	add_action( 'add_meta_boxes', 'terms_add_post_meta_boxes' );
-	add_action( 'save_post', 'terms_save_setting_meta', 10, 2 );
-	add_action( 'save_post', 'terms_save_popup_meta', 10, 2 );
+function wtp_postMetaBoxesSetup() {
+	add_action( 'add_meta_boxes', 'wtp_addPostMetaBoxes' );
+	add_action( 'save_post', 'wtp_saveSettingMeta', 10, 2 );
+	add_action( 'save_post', 'wtp_savePopupMeta', 10, 2 );
 }
 
 
-function terms_save_setting_meta( $post_id, $post ) {
+function wtp_saveSettingMeta( $post_id, $post ) {
 
   if ( !isset( $_POST['terms_enablepopup_nonce'] ) || !wp_verify_nonce( $_POST['terms_enablepopup_nonce'], basename( __FILE__ ) ) )
     return $post_id;
@@ -194,7 +194,7 @@ function terms_save_setting_meta( $post_id, $post ) {
 }
 
 
-function terms_save_popup_meta( $post_id, $post ) {
+function wtp_savePopupMeta( $post_id, $post ) {
 
   if ( !isset( $_POST['terms_popupmeta_nonce'] ) || !wp_verify_nonce( $_POST['terms_popupmeta_nonce'], basename( __FILE__ ) ) )
     return $post_id;
@@ -224,14 +224,14 @@ function terms_save_popup_meta( $post_id, $post ) {
 }
 
 
-function terms_add_post_meta_boxes() {
+function wtp_addPostMetaBoxes() {
 	
 	$screen = array("post", "page");
 
 	add_meta_box(
 		'termpopup-setting',      // ID
 		esc_html__( 'Terms Popup', 'wp-terms-popup' ),    // title
-		'terms_enablepopup_meta_box',   // callback function
+		'wtp_enablepopupMetabox',   // callback function
 		$screen,         // screen
 		'side',         // context
 		'default'         // priority
@@ -240,7 +240,7 @@ function terms_add_post_meta_boxes() {
 	add_meta_box(
 		'thepopup-meta',      // ID
 		esc_html__( 'Popup Setting', 'wp-terms-popup' ),    // title
-		'terms_popup_meta',   // callback function
+		'wtp_popupMeta',   // callback function
 		'termpopup',         // screen
 		'normal',         // context
 		'high'         // priority
@@ -248,7 +248,7 @@ function terms_add_post_meta_boxes() {
 }
 
 
-function terms_enablepopup_meta_box( $object, $box ) {
+function wtp_enablepopupMetabox( $object, $box ) {
 
   wp_nonce_field( basename( __FILE__ ), 'terms_enablepopup_nonce' );
   
@@ -268,7 +268,7 @@ function terms_enablepopup_meta_box( $object, $box ) {
 }
 
 
-function terms_popup_meta( $object, $box ) {
+function wtp_popupMeta( $object, $box ) {
 
   wp_nonce_field( basename( __FILE__ ), 'terms_popupmeta_nonce' );
   
