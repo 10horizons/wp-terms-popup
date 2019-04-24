@@ -1,6 +1,25 @@
+<?php
+
+if ( get_option('termsopt_opac') ) {
+	if (get_option('termsopt_opac') != '10') {
+		$termsopacmoz = '0.'.get_option('termsopt_opac');
+		$termsopac = '.'.get_option('termsopt_opac').'0';
+		$termsopacfilter = get_option('termsopt_opac').'0';
+	}
+	elseif (get_option('termsopt_opac') == '10') {
+		$termsopacmoz = '1.0';
+		$termsopac = '1.0';
+		$termsopacfilter = '100';
+	}
+} else {
+	$termsopacmoz = '0.8';
+	$termsopac = '.80';
+	$termsopacfilter = '80';
+}
+
+?>
 <style type="text/css">
 .tbrightcontent {
-/*display: block;*/
 position: fixed;
 top: 15%;
 left: 25%;
@@ -15,7 +34,6 @@ font-size: 15px;
 }
 
 .tdarkoverlay {
-/*display: block;*/
 position: fixed;
 top: 0%;
 left: 0%;
@@ -23,9 +41,9 @@ width: 100%;
 height: 100%;
 background-color: black;
 z-index: 9999998;
--moz-opacity: 0.8;
-opacity: .80;
-filter: alpha(opacity=80);
+-moz-opacity: <?php echo $termsopacmoz; ?>;
+opacity: <?php echo $termsopac; ?>;
+filter: alpha(opacity=<?php echo $termsopacfilter; ?>);
 }
 
 h3.termstitle {

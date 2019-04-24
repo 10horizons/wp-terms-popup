@@ -74,7 +74,14 @@ if(isset($_SESSION['terms_accepted'])) {
 	//echo session_name();
 }
 else {
-	include('terms.php');
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	
+	if( is_plugin_active( 'wp-terms-popup-pro/index.php' ) ) {
+		include ( ABSPATH . 'wp-content/plugins/wp-terms-popup-pro/terms-pro.php' );
+	}
+	else {
+		include ('terms.php');
+	}
 }
 
 ?>

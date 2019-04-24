@@ -1,12 +1,12 @@
 <?php
 
-function terms_create_admin_menu() {
-    add_options_page( __( 'WP Terms Popup', 'terms-popup-plugin' ), __( 'WP Terms Popup', 'terms-popup-plugin' ), 'administrator', __FILE__, 'terms_popup_settings_page' );
+function wtp_createAdminMenu() {
+    add_options_page( __( 'WP Terms Popup', 'terms-popup-plugin' ), __( 'WP Terms Popup', 'terms-popup-plugin' ), 'administrator', __FILE__, 'wtp_popupSettingsPage' );
 }
-add_action( 'admin_menu', 'terms_create_admin_menu' );
+add_action( 'admin_menu', 'wtp_createAdminMenu' );
 
 
-function terms_popup_settings_page() { ?>
+function wtp_popupSettingsPage() { ?>
 
 <div class="wrap">
 <h2>WP Terms Popup Plugin Settings</h2>
@@ -18,7 +18,7 @@ function terms_popup_settings_page() { ?>
 
 <p>&nbsp;</p>
 
-<p style="font-weight:bold">Below are the GENERAL settings for ALL terms popups. You can override the settings below by editing individual terms popup.</p>
+<p style="font-weight:bold">Below are the GENERAL setting for ALL terms popups. You can override the setting below by editing individual terms popup.</p>
 
 <p>&nbsp;</p>
 
@@ -56,9 +56,13 @@ function terms_popup_settings_page() { ?>
 <input type="text" name="termsopt_redirecturl" size="45" value="<?php echo get_option('termsopt_redirecturl'); ?>" />
 </p>
 
+<p>Set the transparency/opacity level behind popup  :
+<input type="number" name="termsopt_opac" min="1" max="10" size="5" value="<?php echo get_option('termsopt_opac'); ?>" /> (in the scale of 1-10, with 1 being the most transparent, 10 being solid black.)  
+</p>
+
 <p>&nbsp;</p>
 
-<p style="font-weight:bold">Note: Expiry time below does NOT apply to popups displayed by shortcode.</p>
+<p style="font-weight:bold">Note: Expiry time below does NOT apply to popups displayed by shortcodes.</p>
 
 <p>How long should it be until your visitors see the popup again after they agree? :
 <input type="text" name="termsopt_expiry" size="10" value="<?php echo get_option('termsopt_expiry'); ?>" /> (in hours, leave blank if in doubt)
@@ -68,10 +72,12 @@ function terms_popup_settings_page() { ?>
 
 <p><input class="button-primary" type="submit" name="Submit" value="Save Options" /></p>
 <input type="hidden" name="action" value="update" />
-<input type="hidden" name="page_options" value="termsopt_adminenabled,termsopt_sitewide,termsopt_page,termsopt_agreetxt,termsopt_disagreetxt,termsopt_redirecturl,termsopt_expiry" />
+<input type="hidden" name="page_options" value="termsopt_adminenabled,termsopt_sitewide,termsopt_page,termsopt_agreetxt,termsopt_disagreetxt,termsopt_redirecturl,termsopt_opac,termsopt_expiry" />
 </form>
 
-<p>*Upgrade to our <a href="http://termsplugin.com">PRO version</a> if you want to change the style and colors of your popups!</p>
+<?php if( !is_plugin_active( 'wp-terms-popup-pro/index.php' ) ) { ?>
+	<p>*Upgrade to our <a href="http://termsplugin.com">PRO version</a> to have more control over how your popups look to your visitors!</p>
+<?php } ?>
 
 </div>
 <?php }
