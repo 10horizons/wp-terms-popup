@@ -56,6 +56,10 @@ function terms_popup_settings_page() { ?>
 <input type="text" name="termsopt_redirecturl" size="45" value="<?php echo get_option('termsopt_redirecturl'); ?>" />
 </p>
 
+<p>&nbsp;</p>
+
+<p style="font-weight:bold">Note: Expiry time below does NOT apply to popups displayed by shortcode.</p>
+
 <p>How long should it be until your visitors see the popup again after they agree? :
 <input type="text" name="termsopt_expiry" size="10" value="<?php echo get_option('termsopt_expiry'); ?>" /> (in hours, leave blank if in doubt)
 </p>
