@@ -1,6 +1,27 @@
 <?php
 
-if (get_option('termsopt_redirecturl') && get_option('termsopt_redirecturl') != '') {
+if (get_option('termsopt_sitewide') == 1) {
+	$termspageid = get_option('termsopt_page');
+}
+elseif (get_option('termsopt_sitewide') <> 1) {
+	if ($enabled == 1) {
+		$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
+	}
+	elseif ($enabled <> 1) {
+		//nothing happens these days
+		return;
+	}
+}
+else {
+	//nothing happens these days
+	return;
+}
+
+
+if( (get_post_meta( $termspageid, 'terms_redirecturl', true )) != '' ) {
+	$termsRedirectUrl = get_post_meta( $termspageid, 'terms_redirecturl', true );
+}
+elseif (get_option('termsopt_redirecturl') && get_option('termsopt_redirecturl') != '') {
 	$termsRedirectUrl = get_option('termsopt_redirecturl');
 }
 else {
@@ -14,7 +35,10 @@ else {
 	$sesslifetime = 3 * 24 * 60 * 60; // 3 days (in seconds)
 }
 
-ini_set('session.name', 'terms_sessionid');
+$terms_sessionid = 'tsessionid'.$termspageid;
+
+ini_set('session.name', $terms_sessionid);
+
 ini_set('session.gc_maxlifetime', $sesslifetime);
 session_set_cookie_params($sesslifetime);
 
@@ -26,8 +50,20 @@ if (isset($_POST['SubmitAgree'])) {
 	$_SESSION['terms_accepted'] = true;
 }
 else if (isset($_POST['SubmitDecline'])) {
-	header('Location: '.$termsRedirectUrl);
-	exit;
+    if (!headers_sent())
+    {    
+        header('Location: '.$termsRedirectUrl);
+        exit;
+        }
+    else
+        {  
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="'.$url.'";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url='.$termsRedirectUrl.'" />';
+        echo '</noscript>'; exit;
+    }
 }
 
 

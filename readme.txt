@@ -1,10 +1,10 @@
 === WP Terms Popup ===
-Contributors: tentenbiz
+Contributors: tentenbiz, dalv8
 Donate link: http://termsplugin.com
-Tags: terms and conditions, privacy policy, terms of service, conditions, policy, privacy, terms, agree, page, require, popup, lightbox, legal, admin, message
+Tags: terms and conditions, privacy policy, terms of service, conditions, policy, privacy, terms, agree, page, require, popup, lightbox, legal, admin, message, disclaimer
 Requires at least: 3.0.1
-Tested up to: 4.5.2
-Stable tag: 0.1.0
+Tested up to: 4.6.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Make your visitors agree to your terms and conditions before entering your websi
 
 The plugin presents your visitors with a professional looking 'terms and conditions' that will make them agree to it before they can continue browsing your website. This is the easiest way to get your visitors to agree to your terms, privacy policy, etc. before entering your website.
 
-Visitors will only see the terms once. If they agree to your terms, they will never see it again for 30 days. If they don't agree to your terms, they have a choice to go to a URL of your choice. If visitors decide to access your website with a different URL, they will still see the terms until they agree to it. You have the choice whether to enable or disable this to logged in users.
+Visitors will only see the terms once. If they agree to your terms, they will never see it again for the duration of time specified in your setting. If they don't agree to your terms, they have a choice to go to a URL of your choice. If visitors decide to access your website with a different URL, they will still see the terms until they agree to it. You have the choice whether to enable or disable this to logged in users.
 
 Assure you that no visitors could use your website before agreeing to your terms. This makes sure you won't be liable for what your visitors do on your website. Saves you from legal suits, among others.
 
@@ -26,7 +26,7 @@ This plugin is useful for website owners, be it individuals or companies, who ar
 
 **Other Uses**
 
-Other than what the plugin is intended for, the plugin can also be used if you want to display certain message before your visitors have full access to your website.
+Other than what the plugin is intended for, the plugin can also be used if you want to display certain message before your visitors have full access to your website or certain posts or pages.
 
 **How to use**
 
@@ -67,10 +67,18 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 
 == Changelog ==
 
-= 2.0.0 =
-* New release.
+= 1.0.1 =
+* Terms is now converted into a custom post type.
+* User can now create as many different terms as they want and choose to display the terms on any post or page that they desire.
+* User friendly option on post and page screen.
+
+= 0.1.0 =
+* Initial release.
 
 == Upgrade Notice ==
 
-= 2.0.0 =
-New release.
+= 1.0.1 =
+* User who wants to create as many different terms as they want and choose to display the terms on any post or page that they desire should upgrade to this version.
+
+= 0.1.0 =
+Initial release.
