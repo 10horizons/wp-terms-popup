@@ -3,8 +3,8 @@ Contributors: tentenbiz, dalv8
 Donate link: http://termsplugin.com
 Tags: terms and conditions, privacy policy, terms of service, age verification, popup, age verify, conditions, policy, privacy, terms, agree, disclaimer, page, require, lightbox, legal, admin, message
 Requires at least: 3.0.1
-Tested up to: 4.7.5
-Stable tag: 1.1.0
+Tested up to: 4.8.3
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,9 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 
 == Changelog ==
 
+= 1.1.1 =
+* Tidying up the options page in the backend. Now warning shows if no terms popup has been created.
+
 = 1.1.0 =
 * Shortcode usage is now possible. Shortcode can now be used to show popups on custom post types.
 * Backend GUI improvement.
@@ -101,6 +104,9 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Minor update. Tidying up of the options page.
 
 = 1.1.0 =
 Big update. More user friendly interface. You can now use shortcode to show popup on custom post types.

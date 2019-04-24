@@ -3,7 +3,7 @@
 Plugin Name: WP Terms Popup
 Plugin URI: http://termsplugin.com
 Description: Make your visitors agree to your terms and conditions before entering your website. Now you can create as many different terms as you want and choose to display any of them on any specific post or page.
-Version: 1.1.0
+Version: 1.1.1
 Author: Tentenbiz & Dalv8
 Author URI: http://tentenbiz.com
 */
