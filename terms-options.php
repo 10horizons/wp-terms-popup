@@ -14,14 +14,27 @@ function terms_popup_settings_page() { ?>
 <form name="termsForm" method="post" action="options.php">
 <?php wp_nonce_field('update-options') ?>
 
-<h3>Popup settings</h3>
-<p>Enable popup for logged in users? :
+<h3>Popup General Settings</h3>
+
+<p>&nbsp;</p>
+
+<p style="font-weight:bold">Below are the GENERAL settings for ALL popups. You can override the settings below by editing individual popup.</p>
+
+<p>&nbsp;</p>
+
+<p>Enable popups for logged in users? :
 	<input type="checkbox" name="termsopt_adminenabled" value="1" <?php checked( '1', get_option('termsopt_adminenabled') ); ?>>Yes
 </p>
 
-<p>Select page to be displayed on popup :
-<?php wp_dropdown_pages("name=termsopt_page&show_option_none=".__('- Select -')."&selected=" .get_option('termsopt_page')); ?>
+<p>Enable only one popup across the site (sitewide)? :
+	<input type="checkbox" name="termsopt_sitewide" value="1" <?php checked( '1', get_option('termsopt_sitewide') ); ?>>Yes
 </p>
+
+<p>Select terms to be displayed as popup for the above choice (sitewide):
+<?php wp_dropdown_pages("name=termsopt_page&post_type=termpopup&show_option_none=".__('- Select -')."&selected=" .get_option('termsopt_page')); ?>
+</p>
+
+<p>&nbsp;</p>
 
 <p>Custom 'I Agree' button text :
 <input type="text" name="termsopt_agreetxt" size="20" value="<?php echo get_option('termsopt_agreetxt'); ?>" />
@@ -43,10 +56,10 @@ function terms_popup_settings_page() { ?>
 
 <p><input class="button-primary" type="submit" name="Submit" value="Save Options" /></p>
 <input type="hidden" name="action" value="update" />
-<input type="hidden" name="page_options" value="termsopt_adminenabled,termsopt_page,termsopt_agreetxt,termsopt_disagreetxt,termsopt_redirecturl,termsopt_expiry" />
+<input type="hidden" name="page_options" value="termsopt_adminenabled,termsopt_sitewide,termsopt_page,termsopt_agreetxt,termsopt_disagreetxt,termsopt_redirecturl,termsopt_expiry" />
 </form>
 
-<p>*Upgrade to our <a href="http://termsplugin.com">PRO version</a> for more styling options!</p>
+<p>*Upgrade to our <a href="http://termsplugin.com">PRO version</a> if you want to change the style and colors of your popups!</p>
 
 </div>
 <?php }

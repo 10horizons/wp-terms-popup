@@ -43,20 +43,32 @@ margin: -16px -16px 30px -16px;
 
 		<div class="termspopupcontainer">
 		
-		<?php if(get_option('termsopt_page')) { 
-			$termscontent=get_post(get_option('termsopt_page'));?>
+		<?php
+		
+		//Just a reminder. Values already set before.
+		//$currentpostid = get_the_ID();
+		//$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
+
+		if($termspageid) { 
+			$termscontent=get_post($termspageid);?>
 			<h3 class="termstitle"><?php echo $termscontent -> post_title?></h3>
 			<?php echo apply_filters('the_content', $termscontent->post_content);
 		}
-		
-		if( get_option('termsopt_agreetxt') != '' ) {
+
+		if( (get_post_meta( $termspageid, 'terms_agreetxt', true )) != '' ) {
+			$tagree = get_post_meta( $termspageid, 'terms_agreetxt', true );
+		}
+		elseif( get_option('termsopt_agreetxt') != '' ) {
 			$tagree = get_option('termsopt_agreetxt');
 		}
 		else {
 			$tagree = 'I Agree';
 		}
 		
-		if( get_option('termsopt_disagreetxt') != '' ) {
+		if( (get_post_meta( $termspageid, 'terms_disagreetxt', true )) != '' ) {
+			$tdisagree = get_post_meta( $termspageid, 'terms_disagreetxt', true );
+		}
+		elseif( get_option('termsopt_disagreetxt') != '' ) {
 			$tdisagree = get_option('termsopt_disagreetxt');
 		}
 		else {
