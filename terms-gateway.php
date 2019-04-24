@@ -5,12 +5,7 @@ if (get_option('termsopt_sitewide') == 1) {
 }
 elseif (get_option('termsopt_sitewide') <> 1) {
 	if ($enabled == 1) {
-		if ($isshortcode == 0) {
-			$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
-		}
-		elseif ($isshortcode == 1) {
-			$termspageid = $termsidscode;
-		}
+		$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
 	}
 	elseif ($enabled <> 1) {
 		//nothing happens
@@ -40,7 +35,7 @@ else {
 	$sesslifetime = 3 * 24 * 60 * 60; // 3 days (in seconds)
 }
 
-$terms_sessionid = 'tsessionid'.$termspageid;
+$terms_sessionid = 'ttbwtpsessionname'.$termspageid;
 
 ini_set('session.name', $terms_sessionid);
 
@@ -74,6 +69,9 @@ else if (isset($_POST['SubmitDecline'])) {
 
 if(isset($_SESSION['terms_accepted'])) {
 	echo $interception_string;
+	//echo session_id();
+	//echo $_SESSION['terms_accepted'];
+	//echo session_name();
 }
 else {
 	include('terms.php');

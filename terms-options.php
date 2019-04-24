@@ -18,7 +18,7 @@ function terms_popup_settings_page() { ?>
 
 <p>&nbsp;</p>
 
-<p style="font-weight:bold">Below are the GENERAL settings for ALL popups. You can override the settings below by editing individual popup.</p>
+<p style="font-weight:bold">Below are the GENERAL settings for ALL terms popups. You can override the settings below by editing individual terms popup.</p>
 
 <p>&nbsp;</p>
 
@@ -31,6 +31,14 @@ function terms_popup_settings_page() { ?>
 </p>
 
 <p>Select terms to be displayed as popup for the above choice (sitewide):
+
+<?php if ((wp_dropdown_pages("name=termsopt_page&post_type=termpopup&echo=0")) == '' ) { ?>
+
+<br /><br />
+<span style="font-style:italic;">(Please create your first terms by going to Terms Popups > Add New. You will be able to select it after it has been created.)</span>
+
+<?php } ?>
+
 <?php wp_dropdown_pages("name=termsopt_page&post_type=termpopup&show_option_none=".__('- Select -')."&selected=" .get_option('termsopt_page')); ?>
 </p>
 
@@ -47,6 +55,10 @@ function terms_popup_settings_page() { ?>
 <p>URL to redirect to when 'I Do Not Agree' is clicked :
 <input type="text" name="termsopt_redirecturl" size="45" value="<?php echo get_option('termsopt_redirecturl'); ?>" />
 </p>
+
+<p>&nbsp;</p>
+
+<p style="font-weight:bold">Note: Expiry time below does NOT apply to popups displayed by shortcode.</p>
 
 <p>How long should it be until your visitors see the popup again after they agree? :
 <input type="text" name="termsopt_expiry" size="10" value="<?php echo get_option('termsopt_expiry'); ?>" /> (in hours, leave blank if in doubt)

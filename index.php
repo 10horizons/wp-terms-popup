@@ -2,8 +2,8 @@
 /*
 Plugin Name: WP Terms Popup
 Plugin URI: http://termsplugin.com
-Description: Make your visitors agree to your terms and conditions before entering your website. Now you can create as many different terms as you want and choose to display any of them on any specific post or page.
-Version: 1.1.0
+Description: Make your visitors agree to your terms and conditions before entering your website. Now you can create as many different terms as you want and choose to display any of them on any specific post or page. Shortcode requires HTML5.
+Version: 1.1.4
 Author: Tentenbiz & Dalv8
 Author URI: http://tentenbiz.com
 */
@@ -13,6 +13,12 @@ function terms_registerStyles () {
    wp_enqueue_style( 'popupstyle' );
 }
 add_action( 'wp_enqueue_scripts', 'terms_registerStyles', 1 );
+
+
+function terms_registerScripts () {	
+   wp_enqueue_script( 'wtplocalstoragefallback', plugins_url( 'wp-terms-popup/lspolyfill.js' ), false );
+}
+add_action( 'wp_enqueue_scripts', 'terms_registerScripts' );
 
 
 function terms_openPopup () {
@@ -37,16 +43,29 @@ function terms_openPopup () {
 add_action('get_header', 'terms_openPopup'); //where the popup fires
 
 
-function terms_shortcode_call ( $atts ) { //shortcodes are for if user wants to show popups on custom post type items
+function terms_shortcode_call ( $atts ) { //shortcodes are for popups on custom post types
+
 	extract( shortcode_atts( array(
         'id' => 0
     ), $atts ) ); //default id
 	
-	$enabled = 1;
 	$isshortcode = 1;
-	$termsidscode = $atts['id'];
 	
-	include('terms-gateway.php');
+	$termsidscode = $atts['id'];	
+	$termspageid = $termsidscode;
+	
+	if( (get_post_meta( $termspageid, 'terms_redirecturl', true )) != '' ) {
+		$termsRedirectUrl = get_post_meta( $termspageid, 'terms_redirecturl', true );
+	}
+	elseif (get_option('termsopt_redirecturl') && get_option('termsopt_redirecturl') != '') {
+		$termsRedirectUrl = get_option('termsopt_redirecturl');
+	}
+	else {
+		$termsRedirectUrl = 'http://google.com';
+	}
+	
+	include('terms.php');
+	
 }
 add_shortcode('wpterms', 'terms_shortcode_call');
 
