@@ -5,15 +5,20 @@ if (get_option('termsopt_sitewide') == 1) {
 }
 elseif (get_option('termsopt_sitewide') <> 1) {
 	if ($enabled == 1) {
-		$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
+		if ($isshortcode == 0) {
+			$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
+		}
+		elseif ($isshortcode == 1) {
+			$termspageid = $termsidscode;
+		}
 	}
 	elseif ($enabled <> 1) {
-		//nothing happens these days
+		//nothing happens
 		return;
 	}
 }
 else {
-	//nothing happens these days
+	//nothing happens
 	return;
 }
 

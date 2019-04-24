@@ -3,7 +3,7 @@
 Plugin Name: WP Terms Popup
 Plugin URI: http://termsplugin.com
 Description: Make your visitors agree to your terms and conditions before entering your website. Now you can create as many different terms as you want and choose to display any of them on any specific post or page.
-Version: 1.0.2
+Version: 1.1.0
 Author: Tentenbiz & Dalv8
 Author URI: http://tentenbiz.com
 */
@@ -19,10 +19,11 @@ function terms_openPopup () {
 	
 	$currentpostid = get_the_ID();
 	$enabled = get_post_meta( $currentpostid, 'terms_enablepop', true );
+	$isshortcode = 0;
 	
 	if (is_user_logged_in()) {
 		if (get_option('termsopt_adminenabled') <> 1) {
-			//nothing happens these days
+			//nothing happens
 		}
 		elseif (get_option('termsopt_adminenabled') == 1) {
 			include_once('terms-gateway.php');
@@ -34,6 +35,20 @@ function terms_openPopup () {
 
 }
 add_action('get_header', 'terms_openPopup'); //where the popup fires
+
+
+function terms_shortcode_call ( $atts ) { //shortcodes are for if user wants to show popups on custom post type items
+	extract( shortcode_atts( array(
+        'id' => 0
+    ), $atts ) ); //default id
+	
+	$enabled = 1;
+	$isshortcode = 1;
+	$termsidscode = $atts['id'];
+	
+	include('terms-gateway.php');
+}
+add_shortcode('wpterms', 'terms_shortcode_call');
 
 
 function terms_popup_post_type() {
@@ -73,6 +88,9 @@ function terms_popup_post_type() {
 add_action( 'init', 'terms_popup_post_type' );
 
 
+add_filter( 'manage_edit-termpopup_columns', 'terms_edit_termpopup_columns' );
+add_action( 'manage_termpopup_posts_custom_column', 'terms_manage_termpopup_columns', 10, 2 );
+
 function terms_edit_termpopup_columns( $columns ) {
 	
 	$columns = array(
@@ -85,7 +103,6 @@ function terms_edit_termpopup_columns( $columns ) {
 
 	return $columns;
 }
-//add_filter( 'manage_edit-termpopup_columns', 'terms_edit_termpopup_columns' );
 
 
 function terms_manage_termpopup_columns( $column, $post_id ) {
@@ -101,7 +118,6 @@ function terms_manage_termpopup_columns( $column, $post_id ) {
 			break;
 	}
 }
-//add_action( 'manage_termpopup_posts_custom_column', 'terms_manage_termpopup_columns', 10, 2 );
 
 
 add_action( 'load-post.php', 'terms_post_meta_boxes_setup' );
