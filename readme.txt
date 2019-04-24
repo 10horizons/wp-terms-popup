@@ -4,7 +4,7 @@ Donate link: http://termsplugin.com
 Tags: terms and conditions, privacy policy, terms of service, conditions, policy, privacy, terms, agree, page, require, popup, lightbox, legal, admin, message, disclaimer
 Requires at least: 3.0.1
 Tested up to: 4.6.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,19 +14,11 @@ Make your visitors agree to your terms and conditions before entering your websi
 
 **What the plugin does**
 
-The plugin presents your visitors with a professional looking 'terms and conditions' that will make them agree to it before they can continue browsing your website. This is the easiest way to get your visitors to agree to your terms, privacy policy, etc. before entering your website.
+1. The plugin presents your visitors with a professional looking 'terms and conditions' that will make them agree to it before they can continue browsing your website. This is the easiest way to get your visitors to agree to your terms, privacy policy, etc. before entering your website.
 
-Visitors will only see the terms once. If they agree to your terms, they will never see it again for the duration of time specified in your setting. If they don't agree to your terms, they have a choice to go to a URL of your choice. If visitors decide to access your website with a different URL, they will still see the terms until they agree to it. You have the choice whether to enable or disable this to logged in users.
+2. Visitors will only see the terms once. If they agree to your terms, they will never see it again for the duration of time specified in your setting. If they don't agree to your terms, they have a choice to go to a URL of your choice. If visitors decide to access your website with a different URL, they will still see the terms until they agree to it. You have the choice whether to enable or disable this to logged in users.
 
-Assure you that no visitors could use your website before agreeing to your terms. This makes sure you won't be liable for what your visitors do on your website. Saves you from legal suits, among others.
-
-**Who this plugin is for**
-
-This plugin is useful for website owners, be it individuals or companies, who are concerned about legal aspects of the activities on their website, website owners who wished to limit their website's content to visitors of certain age, website owners who just wished to display the website's terms and conditions, privacy policy, or other messages to their visitors before the visitors can continue using their website.
-
-**Other Uses**
-
-Other than what the plugin is intended for, the plugin can also be used if you want to display certain message before your visitors have full access to your website or certain posts or pages.
+3. Assure you that no visitors could use your website before agreeing to your terms. This makes sure you won't be liable for what your visitors do on your website. Saves you from legal suits, among others.
 
 **How to use**
 
@@ -67,6 +59,9 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 
 == Changelog ==
 
+= 1.0.2 =
+* New icon for terms popup custom post type.
+
 = 1.0.1 =
 * Terms is now converted into a custom post type.
 * User can now create as many different terms as they want and choose to display the terms on any post or page that they desire.
@@ -77,8 +72,11 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 
 == Upgrade Notice ==
 
+= 1.0.2 =
+Minor change only. New icon for terms popup custom post type.
+
 = 1.0.1 =
-* User who wants to create as many different terms as they want and choose to display the terms on any post or page that they desire should upgrade to this version.
+User who wants to create as many different terms as they want and choose to display the terms on any post or page that they desire should upgrade to this version.
 
 = 0.1.0 =
 Initial release.
