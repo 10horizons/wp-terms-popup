@@ -3,8 +3,8 @@ Contributors: tentenbiz, dalv8
 Donate link: http://termsplugin.com
 Tags: terms and conditions, privacy policy, terms of service, age verification, popup, age verify, conditions, policy, privacy, terms, agree, disclaimer, page, require, lightbox, legal, admin, message
 Requires at least: 3.0.1
-Tested up to: 4.8.3
-Stable tag: 1.1.1
+Tested up to: 4.9.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Make your visitors agree to your terms and conditions before entering your websi
 
 4. *Since version 1.0.2, you can create as many different "terms" as you want for different purposes (eg. Terms of use, Age verification, Privacy policy, Disclaimer, etc) and show them on any posts or pages.*
 
-5. *Since version 1.1.0, you can use shortcode to display the terms on custom post types too.*
+5. *We are currently fixing our shortcode for next release. Do not use shortcode for now. Please use the option on the edit screen instead: [see screenshot](https://ps.w.org/wp-terms-popup/assets/screenshot-5.gif)*
 
 **How to use**
 
@@ -30,15 +30,13 @@ After installing and activating the plugin, go to *Terms Popup->Add New* to crea
 
 You can choose whether to have one single terms to be shown across the entire website, or have different terms shown on posts or pages for different purposes. If you want to show popup on posts or pages, go to that post or page edit screen and you will see the option on the right side of the screen.
 
-If you wish to show popup on custom post types, use this shortcode: `[wpterms id="8"]` where "8" is the ID of the terms to be shown. DO NOT use shortcodes on posts or pages, because it's redundant.
+Refer this screeenshot for clarity: [see screenshot](https://ps.w.org/wp-terms-popup/assets/screenshot-5.gif)
 
-**Useful info**
+**IMPORTANT!**
 
-* Visit [official plugin's website](http://termsplugin.com) for more info and documentation. 
+* The FREE version of the plugin is handled by the plugin's original developer, Tentenbiz Solutions & Media. To report bugs or seek support, please do so on [the developer's website](http://tentenbiz.com). If you seek for support on the PRO plugin's website, the developer wouldn't see it!
 
-* To report bugs or give suggestions, please do so on [the developer's website](http://tentenbiz.com). 
-
-* Support can be seeked on WordPress.org forum. 
+* The PRO version of the plugin is handled by Dalv8. Problems with payment, PRO download links, and everything to do with the PRO version should be forwarded to Dalv8 via the [official PRO plugin's website](http://termsplugin.com). DO NOT seek for support relating to the free version here!
 
 * Need plugin customization just for your site? Head [over here](http://tentenbiz.com/contact/).
 
@@ -84,6 +82,9 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 
 == Changelog ==
 
+= 1.1.2 =
+* Shortcode warning issued while we are fixing the bug.
+
 = 1.1.1 =
 * Tidying up the options page in the backend. Now warning shows if no terms popup has been created.
 
@@ -104,6 +105,9 @@ If you have knowledge in CSS, you can style it however you want whether by chang
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+* Shortcode warning is issued while we are fixing the bug. Please do not use shortcodes for now until it is fixed.
 
 = 1.1.1 =
 Minor update. Tidying up of the options page.

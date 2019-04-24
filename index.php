@@ -3,7 +3,7 @@
 Plugin Name: WP Terms Popup
 Plugin URI: http://termsplugin.com
 Description: Make your visitors agree to your terms and conditions before entering your website. Now you can create as many different terms as you want and choose to display any of them on any specific post or page.
-Version: 1.1.1
+Version: 1.1.2
 Author: Tentenbiz & Dalv8
 Author URI: http://tentenbiz.com
 */
@@ -38,6 +38,16 @@ add_action('get_header', 'terms_openPopup'); //where the popup fires
 
 
 function terms_shortcode_call ( $atts ) { //shortcodes are for if user wants to show popups on custom post type items
+
+$ttb_shortcode_warning = <<<EOS
+	<p style="font-style: italic;">WARNING!</p>
+	<p style="font-style: italic;">Because of the instability of our shortcode, it is being disabled temporarily until we could solve the problem. Shortcodes should only be used on custom post types.	If you want to display popups on posts or pages, please use the feature that we built for that on the edit screen, as seen in the red circle on this image: <a rel="nofollow" href="https://ps.w.org/wp-terms-popup/assets/screenshot-5.gif">HERE</a></p>
+EOS;
+
+echo $ttb_shortcode_warning;
+
+
+/*
 	extract( shortcode_atts( array(
         'id' => 0
     ), $atts ) ); //default id
@@ -47,6 +57,7 @@ function terms_shortcode_call ( $atts ) { //shortcodes are for if user wants to 
 	$termsidscode = $atts['id'];
 	
 	include('terms-gateway.php');
+	*/
 }
 add_shortcode('wpterms', 'terms_shortcode_call');
 
@@ -96,7 +107,7 @@ function terms_edit_termpopup_columns( $columns ) {
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
 		'title' => __( 'Terms' ),
-		'shortcodeid' => __( 'Shortcode' ),
+		/*'shortcodeid' => __( 'Shortcode' ),*/
 		'author' => __( 'Author' ),
 		'date' => __( 'Date' )
 	);
@@ -108,7 +119,7 @@ function terms_edit_termpopup_columns( $columns ) {
 function terms_manage_termpopup_columns( $column, $post_id ) {
 	global $post;
 
-	switch( $column ) {
+	/*switch( $column ) {
 		case 'shortcodeid' :
 			$shortcodeid = $post_id;
 			printf( __( '[wpterms id="%s"]' ), $shortcodeid );
@@ -116,7 +127,7 @@ function terms_manage_termpopup_columns( $column, $post_id ) {
 
 		default :
 			break;
-	}
+	}*/
 }
 
 
