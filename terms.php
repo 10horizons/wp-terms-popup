@@ -50,11 +50,15 @@ text-transform: capitalize;
 		//Just a reminder. Values already set before.
 		//$currentpostid = get_the_ID();
 		//$termspageid = get_post_meta( $currentpostid, 'terms_selectedterms', true );
-
-		if($termspageid) { 
+		
+		if($termspageid) {
 			$termscontent=get_post($termspageid);?>
 			<h3 class="termstitle"><?php echo $termscontent -> post_title?></h3>
-			<?php echo apply_filters('the_content', $termscontent->post_content);
+			
+			<div class="termscontentwrapper">
+			<?php echo apply_filters('the_content', $termscontent->post_content); ?>
+			</div>
+		<?php
 		}
 
 		if( (get_post_meta( $termspageid, 'terms_agreetxt', true )) != '' ) {
