@@ -1,2 +1,10 @@
 # WP Terms Popup
-Legacy. A copy of the one found on WordPress.org repository. From version 0.1.0 to 1.2.0.
+
+Legacy. From version 0.1.0 to 1.2.0.
+
+Check out tags for version 0.1.0 (initial release) up to version 1.2.0.
+
+Please note that these codes are here for archival purposes only. Get the latest version of the plugin from WordPress.org plugin repository here: https://wordpress.org/plugins/wp-terms-popup/
+
+> The plugin is now managed by **@linksoftware** on WordPress.org.
+**@tentenbiz** remains a contributor, for original versions of the plugin.
